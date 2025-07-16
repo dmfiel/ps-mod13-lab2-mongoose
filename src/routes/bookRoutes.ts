@@ -24,9 +24,8 @@ router.put('/:id', async (req, res) => {
   const { id } = req.params;
   console.log(`Querying books for id: ${id} and updating book: `, req.body);
   try {
-    const options = { new: true }; // Return the document *after* the update
-    const book = db.book.findByIdAndUpdate(id, req.body, options);
-    // const book = db.book.findById(id); //, req.body, options);
+    const options = { new: true }; // Return the book *after* the update
+    const book = await db.book.findByIdAndUpdate(id, req.body, options);
 
     // console.log(book);
     if (book) res.status(204).json({ message: 'Updated book.' });
